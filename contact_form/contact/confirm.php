@@ -61,19 +61,19 @@ define("VALIDATE_PHONE_NUMBER", "/\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?
 
 if (empty($name)) {
   $errors["name"] = "お名前を入力してください";
-} elseif (mb_strlen(($name) > 20)) {
+} elseif (mb_strlen($name) > 20) {
   $errors["name"] = "20文字以内で入力してください";
 }
 
 if (empty($furigana)) {
   $errors["furigana"] = "ふりがなを入力してください";
-} elseif (mb_strlen(($furigana) > 20)) {
+} elseif (mb_strlen($furigana) > 20) {
   $errors["furigana"] = "20文字以内で入力してください";
 }
 
 if (empty($email)) {
   $errors["email"] = "メールアドレスを入力してください";
-} elseif (mb_strlen(($email) > 100)) {
+} elseif (mb_strlen($email) > 100) {
   $errors["email"] = "100文字以内で入力してください";
 } elseif (!preg_match(VALIDATE_EMAIL, $email)) {
   $errors["email"] = "メールアドレスは正しい形式で入力してください";
@@ -93,7 +93,7 @@ if (empty($sex)) {
 }
 
 $prefectures = ["東京都", "愛知県", "大阪府"];
-if ($pref === "選択してください") {
+if (empty($pref)) {
   $errors["pref"] = "お住まいの地域を選択してください";
 } elseif (!in_array($pref, $prefectures)) {
   $errors["pref"] = "お住まいの地域を選択してください";
@@ -101,9 +101,9 @@ if ($pref === "選択してください") {
 
 $contact_reason = ["質問", "ご意見ご要望", "資料請求", "掲載依頼", "その他"];
 if (empty($reason)) {
-  $errors["reason"] = "お問い合わせ内容を選択してください";
+  $errors["reason"] = "お問い合わせ理由を選択してください";
 } elseif (!in_array($reason, $contact_reason)) {
-  $errors["reason"] = "お問い合わせ内容を選択してください";
+  $errors["reason"] = "お問い合わせ理由を選択してください";
 }
 
 if (mb_strlen($contact_body) > 30) {
@@ -126,6 +126,7 @@ if (count($errors) > 0) {
   // $url = $_SERVER["SERVER_NAME"] . $_SERVER["SERVER_PORT"] . $dirname . "/input.php";
   header("HTTP/1.1 303 See Other");
   header("location: input.php");
+  // header('location:https://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/input.php');
   exit;
 }
 ?>

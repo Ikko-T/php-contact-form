@@ -94,30 +94,29 @@ $error_contact_body = $errors["contact_body"] ?? NULL;
     <div class="input-area">
       <label>性別<span class="span">必須</span></label>
       <p class="error"><?php echo h($error_sex); ?></p>
-      <input type="radio" name="sex" value="男性" checked> 男性
-      <input type="radio" name="sex" value="女性"> 女性
+      <input type="radio" name="sex" value="男性" <?php if(isset($sex) && $sex === "男性"){echo "checked";} else { echo "checked"; }?>> 男性
+      <input type="radio" name="sex" value="女性" <?php if(isset($sex) && $sex === "女性") { echo "checked"; } ?>> 女性
     </div>
 
     <div class="input-area">
       <label>お住まいの地域<span class="span">必須</span></label>
       <p class="error"><?php echo h($error_pref); ?></p>
       <select name="pref" required>
-        <option value="選択してください">選択してください</option>
-        <option value="東京都">東京都</option>
-        <option value="愛知県">愛知県</option>
-        <option value="大阪府">大阪府</option>
-        <option value=""><?php echo h($pref); ?></option>
+        <option value="">選択してください</option>
+        <option value="東京都"<?php if(isset($pref) && $pref === "東京都") {echo "selected";} ?>>東京都</option>
+        <option value="愛知県"<?php if(isset($pref) && $pref === "愛知県") {echo "selected";} ?>>愛知県</option>
+        <option value="大阪府"<?php if(isset($pref) && $pref === "大阪府") {echo "selected";} ?>>大阪府</option>
       </select>
     </div>
 
     <div class="input-area">
       <label>お問い合わせ理由<span class="span">必須</span></label>
       <p class="error"><?php echo h($error_reason); ?></p>
-      <label><input type="checkbox" name="reason[]" value="質問">質問</label>
-      <label><input type="checkbox" name="reason[]" value="ご意見ご要望">ご意見ご要望</label>
-      <label><input type="checkbox" name="reason[]" value="資料請求">資料請求</label>
-      <label><input type="checkbox" name="reason[]" value="掲載依頼">掲載依頼</label>
-      <label><input type="checkbox" name="reason[]" value="その他">その他</label>
+      <!-- <label><input type="checkbox" name="reason[]" value="質問" <?php if(isset($reasons[0])) { echo "checked"; } ?>>質問</label>
+      <label><input type="checkbox" name="reason[]" value="ご意見ご要望" <?php if(isset($reasons[1])) { echo "checked"; } ?>>ご意見ご要望</label>
+      <label><input type="checkbox" name="reason[]" value="掲載依頼" <?php if(isset($reasons[2])) { echo "checked"; } ?>>掲載依頼</label>
+      <label><input type="checkbox" name="reason[]" value="資料請求" <?php if(isset($reasons[3])) { echo "checked"; } ?>>資料請求</label>
+      <label><input type="checkbox" name="reason[]" value="その他" <?php if(isset($reasons[4])) { echo "checked"; } ?>>その他</label> -->
     </div>
 
     <div class="input-area">
